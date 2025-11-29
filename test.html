@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Data Layer Test Page</title>
+    <script>
+        // Initialize dataLayer
+        window.dataLayer = window.dataLayer || [];
+
+        function pushEvent() {
+            dataLayer.push({
+                'event': 'test_event',
+                'category': 'test',
+                'action': 'click',
+                'label': 'button',
+                'value': Math.floor(Math.random() * 100),
+                'timestamp': new Date().toISOString()
+            });
+        }
+
+        function pushComplex() {
+            dataLayer.push({
+                'event': 'complex_event',
+                'ecommerce': {
+                    'currencyCode': 'USD',
+                    'impressions': [
+                        {
+                            'name': 'Triblend Android T-Shirt',
+                            'id': '12345',
+                            'price': '15.25',
+                            'brand': 'Google',
+                            'category': 'Apparel',
+                            'variant': 'Gray',
+                            'list': 'Search Results',
+                            'position': 1
+                        },
+                        {
+                            'name': 'Donut Friday Scented T-Shirt',
+                            'id': '67890',
+                            'price': '33.75',
+                            'brand': 'Google',
+                            'category': 'Apparel',
+                            'variant': 'Black',
+                            'list': 'Search Results',
+                            'position': 2
+                        }
+                    ]
+                }
+            });
+        }
+
+        function pushUndefined() {
+            dataLayer.push({
+                'event': 'undefined_test',
+                'valid_prop': 'value',
+                'missing_prop': undefined,
+                'null_prop': null,
+                'nested': {
+                    'undefined_nested': undefined
+                }
+            });
+        }
+
+        function reassignDataLayer() {
+            console.log('Reassigning dataLayer...');
+            // Simulate GTM initialization or hard reset
+            window.dataLayer = [];
+            dataLayer.push({ 'event': 'after_reassignment', 'status': 'working' });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Data Layer Test Page</h1>
+    <div style="margin-bottom: 20px;">
+        <button onclick="pushEvent()">Push Simple Event</button>
+        <button onclick="pushComplex()">Push Complex Event</button>
+    </div>
+    <div style="margin-bottom: 20px;">
+        <button onclick="pushUndefined()">Push Undefined Values</button>
+        <button onclick="reassignDataLayer()">Reassign dataLayer = []</button>
+        <button onclick="history.pushState({}, '', '?spa_nav=' + Date.now())">Simulate SPA Navigation</button>
+    </div>
+    <p>Open DevTools and check the "Data Layer" tab.</p>
+</body>
+
+</html>
