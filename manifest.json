@@ -3,6 +3,9 @@
     "name": "Data Layer Inspector",
     "version": "1.1",
     "description": "Inspects and monitors dataLayer pushes in Chrome DevTools.",
+    "icons": {
+        "128": "src/icon.png"
+    },
     "devtools_page": "src/devtools.html",
     "permissions": [
         "activeTab",
