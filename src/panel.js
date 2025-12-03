@@ -219,8 +219,8 @@ chrome.devtools.inspectedWindow.eval('window.location.href', (result, isExceptio
 
 // Handle Navigation
 chrome.devtools.network.onNavigated.addListener(function (url) {
-    events = [];
-    eventList.innerHTML = '';
+    // events = []; // Don't clear global events list if we want to keep history
+    // eventList.innerHTML = ''; // Don't clear UI
     currentGroup = null; // Reset current group so createGroup works fresh
     // Create new group for new page
     createGroup(url);
